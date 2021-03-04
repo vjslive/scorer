@@ -21,5 +21,9 @@ public class Match {
 	
 	private Team team_win;
 	
+	private String time;
+	
+	private String venue;
+	
 	private Team umpire_team;
 }
