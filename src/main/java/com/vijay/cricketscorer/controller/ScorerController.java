@@ -18,9 +18,9 @@ public class ScorerController {
 	    @GetMapping("/showMatches")
 	    public String findMatches(Model model) {
 
-	        var cities = (List<Match>) scorerService.findAll();
+	        var matches = (List<Match>) scorerService.findAll();
 
-	        model.addAttribute("cities", cities);
+	        model.addAttribute("matches", matches);
 
 	        return "showMatches";
 	    }

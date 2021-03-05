@@ -23,12 +23,12 @@
             
             <tr th:each="match : ${matches}">
                 <td th:text="${match.match_no}">Match No</td>
-                <td th:text="${match.team_a}">Home Team</td>
-                <td th:text="${match.team_b}">Visitor Team</td>
+                <td th:text="${match.team_a.team_name}">Home Team</td>
+                <td th:text="${match.team_b.team_name}">Visitor Team</td>
                 <td th:text="${match.date}">Date</td>
                 <td th:text="${match.time}">Time</td>
-                <td th:text="${match.umpire_team}">Umpire</td>
-                <td th:text="${match.team_win}">Team Won</td>
+                <td th:text="${match.umpire_team.team_name}">Umpire</td>
+                <td th:text="${match.team_win?.team_name}">Team Won</td>
             </tr>
         </table>
 
