@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="player", schema="scorer")
 public class Player {
@@ -20,8 +22,10 @@ public class Player {
 	private Integer player_no;	
 
 	private String player_name;
-	@ManyToOne
-	@JoinColumn(name="team_no")
+	
+	@JsonBackReference
+	@ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "team", referencedColumnName = "team_no")
 	private Team team;
 
 	public Integer getPlayer_no() {

@@ -7,8 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="match", schema="scorer")
@@ -18,12 +19,18 @@ public class Match {
     private Integer match_no;
 	
 	private String date;
+	
+	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "team_a", referencedColumnName = "team_no")
 	private Team team_a;
+	
+	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "team_b", referencedColumnName = "team_no")
 	private Team team_b;
+	
+	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "team_win", referencedColumnName = "team_no")
 	private Team team_win;
@@ -31,6 +38,8 @@ public class Match {
 	private String time;
 	
 	private String venue;
+	
+	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "umpire_team", referencedColumnName = "team_no")
 	private Team umpire_team;

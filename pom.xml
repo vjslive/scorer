@@ -6,16 +6,19 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.3.9.RELEASE</version>
+		
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.vijay</groupId>
 	<artifactId>cricketscorer</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>cricketscorer</name>
+	<packaging>war</packaging>
 	<description>Cricket scorer for Spring Boot</description>
 	<properties>
 		<java.version>15</java.version>
 		<vaadin.version>14.4.8</vaadin.version>
+		<start-class>com.vijay.cricketscorer.CricketscorerApplication</start-class>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -26,7 +29,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-cache</artifactId>
 		</dependency>
-		
+		<dependency>
+		   <groupId>org.springframework.boot</groupId>
+		   <artifactId>spring-boot-starter-tomcat</artifactId>
+		   <scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -48,10 +55,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 		<dependency>
@@ -67,14 +70,7 @@
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-spring-boot-starter</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.integration</groupId>
-			<artifactId>spring-integration-http</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.integration</groupId>
-			<artifactId>spring-integration-jdbc</artifactId>
-		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.integration</groupId>
 			<artifactId>spring-integration-jpa</artifactId>
@@ -87,10 +83,6 @@
 		<dependency>
 			<groupId>org.springframework.session</groupId>
 			<artifactId>spring-session-jdbc</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.thymeleaf.extras</groupId>
-			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
 		</dependency>
 
 		<dependency>
@@ -136,6 +128,7 @@
 	</dependencyManagement>
 
 	<build>
+    <finalName>${artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -183,5 +176,4 @@
 			</build>
 		</profile>
 	</profiles>
-
 </project>

@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="team", schema="scorer")
 
@@ -22,14 +25,34 @@ public class Team {
     @GeneratedValue
 	private Integer team_no;
 	
-	private String team_name;	
+	private String team_name;
+	
+	private String team_pass;
 
 	private Integer match_pts;
 	
-	
+	@JsonManagedReference
+	@JsonIgnore
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="team_a",targetEntity=Match.class)
-	private List<Match> matches;
+	private List<Match> teamAmatches;
 	
+	@JsonManagedReference
+	@JsonIgnore
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="team_b",targetEntity=Match.class)
+	private List<Match> teamBmatches;
+	
+	@JsonManagedReference
+	@JsonIgnore
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="team_win",targetEntity=Match.class)
+	private List<Match> teamWinmatches;
+	
+	@JsonManagedReference
+	@JsonIgnore
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="umpire_team",targetEntity=Match.class)
+	private List<Match> umpireTeammatches;
+	
+	@JsonManagedReference
+	@JsonIgnore
 	@Access(AccessType.PROPERTY)
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="team",targetEntity=Player.class)
 	private List<Player> players;
@@ -58,12 +81,49 @@ public class Team {
 		this.match_pts = match_pts;
 	}
 
-	public List<Match> getMatches() {
-		return matches;
+	@Override
+	public String toString() {
+		return "Team No::" + getTeam_no() + ", Team Name::" + getTeam_name() + ", MatchPoints::" + getMatch_pts() + ", Pass::" + getTeam_pass();
 	}
 
-	public void setMatches(List<Match> matches) {
-		this.matches = matches;
+	public String getTeam_pass() {
+		return team_pass;
+	}
+
+	public void setTeam_pass(String team_pass) {
+		this.team_pass = team_pass;
+	}
+
+	public List<Match> getTeamAmatches() {
+		return teamAmatches;
+	}
+
+	public void setTeamAmatches(List<Match> teamAmatches) {
+		this.teamAmatches = teamAmatches;
+	}
+
+	public List<Match> getTeamBmatches() {
+		return teamBmatches;
+	}
+
+	public void setTeamBmatches(List<Match> teamBmatches) {
+		this.teamBmatches = teamBmatches;
+	}
+
+	public List<Match> getTeamWinmatches() {
+		return teamWinmatches;
+	}
+
+	public void setTeamWinmatches(List<Match> teamWinmatches) {
+		this.teamWinmatches = teamWinmatches;
+	}
+
+	public List<Match> getUmpireTeammatches() {
+		return umpireTeammatches;
+	}
+
+	public void setUmpireTeammatches(List<Match> umpireTeammatches) {
+		this.umpireTeammatches = umpireTeammatches;
 	}
 
 	public List<Player> getPlayers() {
@@ -72,10 +132,5 @@ public class Team {
 
 	public void setPlayers(List<Player> players) {
 		this.players = players;
-	}
-	
-	@Override
-	public String toString() {
-		return "Team No::" + getTeam_no() + ", Team Name::" + getTeam_name() + ", MatchPoints::" + getMatch_pts();
 	}
 }
