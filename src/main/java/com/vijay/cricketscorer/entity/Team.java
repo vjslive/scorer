@@ -27,36 +27,11 @@ public class Team {
 	
 	private String team_name;
 	
+	@JsonIgnore
 	private String team_pass;
 
 	private Integer match_pts;
 	
-	@JsonManagedReference
-	@JsonIgnore
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="team_a",targetEntity=Match.class)
-	private List<Match> teamAmatches;
-	
-	@JsonManagedReference
-	@JsonIgnore
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="team_b",targetEntity=Match.class)
-	private List<Match> teamBmatches;
-	
-	@JsonManagedReference
-	@JsonIgnore
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="team_win",targetEntity=Match.class)
-	private List<Match> teamWinmatches;
-	
-	@JsonManagedReference
-	@JsonIgnore
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="umpire_team",targetEntity=Match.class)
-	private List<Match> umpireTeammatches;
-	
-	@JsonManagedReference
-	@JsonIgnore
-	@Access(AccessType.PROPERTY)
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="team",targetEntity=Player.class)
-	private List<Player> players;
-
 	public Integer getTeam_no() {
 		return team_no;
 	}
@@ -92,45 +67,5 @@ public class Team {
 
 	public void setTeam_pass(String team_pass) {
 		this.team_pass = team_pass;
-	}
-
-	public List<Match> getTeamAmatches() {
-		return teamAmatches;
-	}
-
-	public void setTeamAmatches(List<Match> teamAmatches) {
-		this.teamAmatches = teamAmatches;
-	}
-
-	public List<Match> getTeamBmatches() {
-		return teamBmatches;
-	}
-
-	public void setTeamBmatches(List<Match> teamBmatches) {
-		this.teamBmatches = teamBmatches;
-	}
-
-	public List<Match> getTeamWinmatches() {
-		return teamWinmatches;
-	}
-
-	public void setTeamWinmatches(List<Match> teamWinmatches) {
-		this.teamWinmatches = teamWinmatches;
-	}
-
-	public List<Match> getUmpireTeammatches() {
-		return umpireTeammatches;
-	}
-
-	public void setUmpireTeammatches(List<Match> umpireTeammatches) {
-		this.umpireTeammatches = umpireTeammatches;
-	}
-
-	public List<Player> getPlayers() {
-		return players;
-	}
-
-	public void setPlayers(List<Player> players) {
-		this.players = players;
 	}
 }

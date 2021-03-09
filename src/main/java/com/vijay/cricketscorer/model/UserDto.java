@@ -1,6 +1,6 @@
 package com.vijay.cricketscorer.model;
 
-public class User {
+public class UserDto {
 	
     private String userName;
 	
