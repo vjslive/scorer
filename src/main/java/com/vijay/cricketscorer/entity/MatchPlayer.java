@@ -1,10 +1,16 @@
 package com.vijay.cricketscorer.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="matchplayer", schema="scorer")
@@ -12,10 +18,16 @@ public class MatchPlayer {
 
 	@Id
 	@Column(name = "player_match_no")
-    @GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer player_match_no;	
-	private Integer match_no;	
-	private Integer player_no;	
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "match_no", referencedColumnName = "match_no")
+	private Match matchNo;	
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "player_no", referencedColumnName = "player_no")
+	private Player playerNo;	
 	private Integer runs_taken;	
 	private Integer balls_faced;	
 	private Integer runs_given;
@@ -26,23 +38,18 @@ public class MatchPlayer {
 	private Integer no_balls;	
 	private Integer byes;	
 	private Integer wickets;
+	private String out;
+	@ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "bowler", referencedColumnName = "player_no")
+	private Player bowler;
+	@ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fielder", referencedColumnName = "player_no")
+	private Player fielder;
 	public Integer getPlayer_match_no() {
 		return player_match_no;
 	}
 	public void setPlayer_match_no(Integer player_match_no) {
 		this.player_match_no = player_match_no;
-	}
-	public Integer getMatch_no() {
-		return match_no;
-	}
-	public void setMatch_no(Integer match_no) {
-		this.match_no = match_no;
-	}
-	public Integer getPlayer_no() {
-		return player_no;
-	}
-	public void setPlayer_no(Integer player_no) {
-		this.player_no = player_no;
 	}
 	public Integer getRuns_taken() {
 		return runs_taken;
@@ -103,6 +110,36 @@ public class MatchPlayer {
 	}
 	public void setWickets(Integer wickets) {
 		this.wickets = wickets;
+	}
+	public Match getMatchNo() {
+		return matchNo;
+	}
+	public void setMatchNo(Match match_no) {
+		this.matchNo = match_no;
+	}
+	public Player getPlayerNo() {
+		return playerNo;
+	}
+	public void setPlayerNo(Player playerNo) {
+		this.playerNo = playerNo;
+	}
+	public String getOut() {
+		return out;
+	}
+	public void setOut(String out) {
+		this.out = out;
+	}
+	public Player getBowler() {
+		return bowler;
+	}
+	public void setBowler(Player bowler) {
+		this.bowler = bowler;
+	}
+	public Player getFielder() {
+		return fielder;
+	}
+	public void setFielder(Player fielder) {
+		this.fielder = fielder;
 	}
 	
 }

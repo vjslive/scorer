@@ -5,7 +5,7 @@
 CREATE TABLE scorer.team
 (
     team_no integer NOT NULL,
-    team_name text COLLATE pg_catalog."default" NOT NULL,
+    teamName text COLLATE pg_catalog."default" NOT NULL,
     match_pts integer,
     CONSTRAINT "Team_pkey" PRIMARY KEY (team_no)
 )

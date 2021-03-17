@@ -39,6 +39,10 @@ public class Match {
 	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "umpire_team", referencedColumnName = "team_no")
 	private Team umpire_team;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "battingfirst", referencedColumnName = "team_no")
+	private Team battingfirst;
 
 	public Integer getMatch_no() {
 		return match_no;
@@ -109,5 +113,13 @@ public class Match {
 		return "Match No::" + getMatch_no() + ", Date::" +  getDate() + ", TeamA::" + getTeam_a().toString() + ", TeamB::"
 				+ getTeam_b().toString() + ", TeamWin::" + getTeam_win() + ", Time::" +  getTime() + ", Venue::" + getVenue() 
 				+ ", UmpireTeam::" + getUmpire_team();
+	}
+
+	public Team getBattingfirst() {
+		return battingfirst;
+	}
+
+	public void setBattingfirst(Team battingfirst) {
+		this.battingfirst = battingfirst;
 	}
 }
