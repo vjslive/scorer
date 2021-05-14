@@ -7,16 +7,17 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.vijay.cricketscorer.entity.Match;
 import com.vijay.cricketscorer.entity.Player;
 import com.vijay.cricketscorer.entity.Team;
+import com.vijay.cricketscorer.model.AwardsDto;
 import com.vijay.cricketscorer.model.CardDto;
 import com.vijay.cricketscorer.model.PlayerDto;
 import com.vijay.cricketscorer.model.ScorecardDto;
@@ -24,7 +25,7 @@ import com.vijay.cricketscorer.model.UserDto;
 import com.vijay.cricketscorer.service.ScorerService;
 
 
-@RestController
+@Controller
 @CrossOrigin(value = "*")
 public class ScorerController {
 	
@@ -37,7 +38,7 @@ public class ScorerController {
 
 		
 		log.info("Inside apiConnect");
-		return "showMatches";
+		return "index";
 	}
 
 	@GetMapping("/showMatches")
@@ -90,6 +91,20 @@ public class ScorerController {
 			return new ResponseEntity<>("Getting teams failed", HttpStatus.SERVICE_UNAVAILABLE);
 		} else {
 			return new ResponseEntity<>(teams, HttpStatus.OK);
+		}
+	}
+	
+	@GetMapping("/getAwardsList")
+	public ResponseEntity<?> getAwardsList() {
+		log.info("Inside getTeams");
+		AwardsDto awards = scorerService.getTopScorers(); 
+		
+		if (awards.getBestAllrounderList().size() == 0 && awards.getBestBatsmanList().size() == 0 
+				&& awards.getBestBowlerList().size() == 0) {
+			 
+			return new ResponseEntity<>("Getting Awards failed", HttpStatus.SERVICE_UNAVAILABLE);
+		} else {
+			return new ResponseEntity<>(awards, HttpStatus.OK);
 		}
 	}
 	

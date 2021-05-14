@@ -10,8 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 @Entity
 @Table(name="matchplayer", schema="scorer")
 public class MatchPlayer {
@@ -30,7 +28,7 @@ public class MatchPlayer {
 	private Player playerNo;	
 	private Integer runs_taken;	
 	private Integer balls_faced;	
-	private Integer runs_given;
+	
 	private Integer balls_bowled;	
 	private Integer fours;	
 	private Integer sixes;	
@@ -38,7 +36,9 @@ public class MatchPlayer {
 	private Integer no_balls;	
 	private Integer byes;	
 	private Integer wickets;
+	private Integer battingorder;
 	private String out;
+	private Integer gaveruns;
 	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "bowler", referencedColumnName = "player_no")
 	private Player bowler;
@@ -63,11 +63,11 @@ public class MatchPlayer {
 	public void setBalls_faced(Integer balls_faced) {
 		this.balls_faced = balls_faced;
 	}
-	public Integer getRuns_given() {
-		return runs_given;
+	public Integer getGaveruns() {
+		return gaveruns;
 	}
-	public void setRuns_given(Integer runs_given) {
-		this.runs_given = runs_given;
+	public void setGaveruns(Integer gaveruns) {
+		this.gaveruns = gaveruns;
 	}
 	public Integer getBalls_bowled() {
 		return balls_bowled;
@@ -119,6 +119,12 @@ public class MatchPlayer {
 	}
 	public Player getPlayerNo() {
 		return playerNo;
+	}
+	public Integer getBattingorder() {
+		return battingorder;
+	}
+	public void setBattingorder(Integer battingorder) {
+		this.battingorder = battingorder;
 	}
 	public void setPlayerNo(Player playerNo) {
 		this.playerNo = playerNo;

@@ -34,7 +34,7 @@ public class BowlerDto {
 		return runsgiven;
 	}
 	public void setRunsgiven(Integer runs) {
-		this.runsgiven = runsgiven;
+		this.runsgiven = runs;
 	}
 	public Integer getByes() {
 		return byes;

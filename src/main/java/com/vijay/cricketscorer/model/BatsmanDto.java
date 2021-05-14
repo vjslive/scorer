@@ -11,6 +11,7 @@ public class BatsmanDto {
 	private String outBy;
 	private String bowler;
 	private String fielder;
+	private Integer battingorder;
 	
 	public Integer getBatsmanNo() {
 		return batsmanNo;
@@ -65,6 +66,12 @@ public class BatsmanDto {
 	}
 	public void setFielder(String fielder) {
 		this.fielder = fielder;
+	}
+	public Integer getBattingorder() {
+		return battingorder;
+	}
+	public void setBattingorder(Integer battingorder) {
+		this.battingorder = battingorder;
 	}
 	
 }
